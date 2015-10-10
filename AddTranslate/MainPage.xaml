@@ -7,7 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid >
+        <Grid.Background>
+            <ImageBrush x:Name="imgBackground"  Stretch="UniformToFill" />
+        </Grid.Background>
+        
         <Button x:Name="btn_opentxt" Content="打开txt文件" HorizontalAlignment="Left" Margin="130,111,0,0" VerticalAlignment="Top" Click="btn_opentxt_Click"/>
         <Button x:Name="btnOpenStrange" Content="打开生词文件" HorizontalAlignment="Left" Margin="130,46,0,0" VerticalAlignment="Top" Click="btnOpenStrange_Click"/>
         <Button x:Name="btnSaveFile" Content="保存文件" HorizontalAlignment="Left" Margin="130,180,0,0" VerticalAlignment="Top" Click="btnSaveFile_Click"/>
