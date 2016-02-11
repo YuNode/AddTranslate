@@ -1,10 +1,32 @@
 ﻿body {
+    text-align:center;
+    width:100%;
 }
 
-.win-button{
+/*.win-button{
     margin:5px;
+}*/
+
+#btnOpenNewWordFile {
+    width:98%;
+    margin:5px
 }
+#btnOpenEnglishTextFile {
+    width:98%;
+    margin:5px
+}
+#btnStartAddComment {
+    width:98%;
+    margin:5px
+}
+
+#btnSaveProcessedFile {
+    width:98%;
+    margin:5px
+}
+
 
 #main{
-    margin-left: 20%;
+    margin:0px auto;
+    
 }
