@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <title>AddAnnotations</title>
+
+    <!-- WinJS 引用 -->
+    <link href="WinJS/css/ui-light.css" rel="stylesheet" />
+    <script src="WinJS/js/base.js"></script>
+    <script src="WinJS/js/ui.js"></script>
+
+    <!-- AddAnnotations 引用 -->
+    <link href="/css/default.css" rel="stylesheet" />
+    <script src="/js/default.js"></script>
+</head>
+<body class="win-type-body">
+    <div class="content">
+        <div class="NewWordSelect">
+            <fieldset class="controlGroup verticalStacking">
+                <legend class="controlGroupName">选择生词本：</legend>
+                <label>
+                    <input id="option1" type="checkbox" class="checkboxExample1" checked/>默认生词本
+                </label>
+                <br />
+                <label>
+                    <input id="option2" type="checkbox" class="checkboxExample1"  />四级生词
+                </label>
+                <br />
+                <label>
+                    <input id="option3" type="checkbox" class="checkboxExample1" />六级生词
+                </label>
+                <br />
+            </fieldset>
+            <button class="win-button">导入其它生词本</button>
+        </div>
+        <button class="win-button btn_open_newword_file">打开要添加注释的文本</button>
+        <div class="switch" data-win-control="WinJS.UI.ToggleSwitch" data-win-options="{title: '保存文件到原目录'}"></div>
+        <button class="win-button">开始处理</button>
+        <div class="text_without_annotation_file">
+            
+        </div>
+        
+    </div>
+</body>
+</html>

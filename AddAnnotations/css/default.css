@@ -1,0 +1,50 @@
+﻿body {
+}
+
+
+.content{
+    width:720px;
+    margin:0 auto;
+}
+
+.NewWordSelect{
+    /*margin: 20px*/
+}
+.controlGroup
+{
+    margin: 0px 0px 20px 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+.controlGroupName
+{
+    font:normal normal normal 11pt/15pt "Segoe UI Semilight";
+    font-size: 11pt; 
+    margin:0px 0px 10px 0px;
+    padding:0px;
+    border: 0px;
+    position:relative;
+    vertical-align:top;
+    display:block;
+}
+
+.verticalStacking input[type="checkbox"]
+{
+    margin-bottom: 16px;
+}
+
+.btn_open_newword_file{
+    margin-top:5px;
+}
+
+.switch{
+     /*display:inline;*/
+     margin-bottom:5px;
+}
+.text_without_annotation_file{
+    height:250px;
+    /*background-color:whitesmoke;*/
+    margin-top:8px;
+}
+
