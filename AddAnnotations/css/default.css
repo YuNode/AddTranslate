@@ -3,27 +3,27 @@
 
 
 .content{
-    width:720px;
-    margin:0 auto;
+    width:95%;
+    margin:0.5rem auto;
 }
 
 .NewWordSelect{
-    /*margin: 20px*/
+    /*margin: 20rem*/
 }
 .controlGroup
 {
-    margin: 0px 0px 20px 0px;
-    padding: 0px;
-    border: 0px;
+    margin: 0rem 0rem 1rem 0rem;
+    padding: 0rem;
+    border: 0rem;
 }
 
 .controlGroupName
 {
     font:normal normal normal 11pt/15pt "Segoe UI Semilight";
     font-size: 11pt; 
-    margin:0px 0px 10px 0px;
-    padding:0px;
-    border: 0px;
+    margin:0rem 0rem 0.8rem 0rem;
+    padding:0rem;
+    border: 0rem;
     position:relative;
     vertical-align:top;
     display:block;
@@ -31,20 +31,20 @@
 
 .verticalStacking input[type="checkbox"]
 {
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
 }
 
 .btn_open_newword_file{
-    margin-top:5px;
+    margin-top:0.3rem;
 }
 
 .switch{
      /*display:inline;*/
-     margin-bottom:5px;
+     margin-bottom:0.3rem;
 }
 .text_without_annotation_file{
-    height:250px;
+    height:15rem;
     /*background-color:whitesmoke;*/
-    margin-top:8px;
+    margin-top:0.5rem;
 }
 
