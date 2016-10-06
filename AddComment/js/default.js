@@ -7,6 +7,9 @@
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
 
+    var isUseDefaultNewWordBook = true;
+
+
     app.onactivated = function (args)
     {
         if (args.detail.kind === activation.ActivationKind.launch)
@@ -17,7 +20,9 @@
                 document.getElementById("btnOpenNewWordFile").addEventListener("click", openNewWordFile, false);
                 document.getElementById("btnOpenEnglishTextFile").addEventListener("click", openEnglishTextFile, false);
                 document.getElementById("btnSaveProcessedFile").addEventListener("click", saveProcessedFile, false);
-                document.getElementById("btnStartAddComment").addEventListener("click", startAddComment, false);
+                document.getElementById("btnStartAddComment").addEventListener("click", addComment1, false);
+                document.getElementById("checkbox").addEventListener("click", checkboxHandle, false);
+
             } else
             {
                 // TODO: 此应用程序已挂起，然后终止。
@@ -36,6 +41,24 @@
 
     app.start();
 
+    function checkboxHandle()
+    {
+        var checkbox = document.getElementById("checkbox");
+
+        if (checkbox.checked == true)
+        {
+            console.log("选中");
+            isUseDefaultNewWordBook = true;
+        }
+        else
+        {
+            console.log("不选中");
+            isUseDefaultNewWordBook = false;
+
+        }
+
+
+    }
 
     //判断是否英文
     function isEnglish(str)
@@ -49,6 +72,37 @@
             }
         }
         return true;
+    }
+
+    function handleNewWords(lines)
+    {
+        var arrNewWord = new Array();//储存生词的数组
+        for (var i = 0; i < lines.length; i++)
+        {
+            var words = lines[i].split(' '); //一行中的各个单词
+            var englishWord = words[0];//一行前边的英语单词
+            var chineseWord = null;//一行后边的中文解释
+
+            for (var j = 1; j < words.length; j++)
+            {
+                if (isEnglish(words[j]) == false)
+                {
+                    //不是由英文、数字组成
+                    arrNewWord.push(englishWord); //确定英语单词
+                    chineseWord = words[j];
+                    for (var k; k < words.length; k++)
+                    {
+                        chineseWord = chineseWord + words[k];
+                    }
+                    arrNewWord.push(chineseWord);
+                } else
+                {
+                    englishWord = englishWord + words[j];
+                }
+            }
+            
+        }
+        return arrNewWord;
     }
 
     var arrNewWord = new Array();//储存生词的数组
@@ -67,41 +121,7 @@
 
                 Windows.Storage.FileIO.readLinesAsync(file).then(function (contents)
                 {
-
-                    for (var i = 0; i < contents.length; i++)
-                    {
-                        var words = contents[i].split(' '); //一行中的各个单词
-                        var englishWord = words[0];//一行前边的英语单词
-                        var chineseWord = null;//一行后边的中文解释
-
-
-                        for (var j = 1; j < words.length; j++)
-                        {
-                            if (isEnglish(words[j]) == false)
-                            {
-                                //不是由英文、数字组成
-                                arrNewWord.push(englishWord); //确定英语单词
-                                chineseWord = words[j];
-                                for (var k; k < words.length; k++)
-                                {
-                                    chineseWord = chineseWord + words[k];
-                                }
-                                arrNewWord.push(chineseWord);
-                            } else
-                            {
-                                englishWord = englishWord + words[j];
-                            }
-
-                        }
-
-
-                    }
-
-                    var debugData = Windows.Storage.ApplicationData.current.localSettings;
-
-                    //debugData.values["debugInfo"] = arrNewWord[7];
-                    //return arrNewWord;
-
+                    arrNewWord = handleNewWords(contents)
                 });
             } else
             {
@@ -165,11 +185,46 @@
         });
     }
 
+   
+
+    function addComment1()
+    {
+        //判断是否使用默认生词本，否是则把arrNewWord赋值为内置生词本
+        if (isUseDefaultNewWordBook)
+        {
+            var fileUri = new Windows.Foundation.Uri('ms-appx:///Assets/vocabulary.txt');
+            Windows.Storage.StorageFile.getFileFromApplicationUriAsync(fileUri).then(function (file)
+            {
+                if (file)
+                {
+
+                    Windows.Storage.FileIO.readLinesAsync(file).then(function (contents)
+                    {
+                        arrNewWord = handleNewWords(contents);
+                    }).done(function ()
+                    {
+                        addComment2();
+                    }, function () { console.log("Error:updata tile") });
+                } else
+                {
+                    console.log("Error:read file");
+                }
+            });
+        } else
+        {
+            addComment2();
+        }
+
+        
+    }
+
     var arrNewLines = new Array();//储存添加注释后的行
-    function startAddComment()
+    function addComment2()
     {
         Windows.Storage.FileIO.readLinesAsync(englishTextFile).then(function (textLines)
         {
+            console.log(textLines[0]);
+            console.log(arrNewWord[5]);
             for (var i = 0; i < textLines.length; i++)  //遍历所有行
             {
                 var words = textLines[i].split(/\s+/); //拆分行
@@ -191,7 +246,7 @@
                 arrNewLines.push(textLines[i]);
             }
 
-            //document.getElementById("labDebug").innerHTML = arrNewLines[0];
+            
         });
     }
 
